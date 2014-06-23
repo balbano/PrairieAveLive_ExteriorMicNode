@@ -3,6 +3,9 @@ Microphone Node, Arduino Fio, Electret mic, XBEE
 ************************************************/
 
 #include <XBee.h>
+#include <SoftwareSerial.h>
+
+SoftwareSerial softSerial(4, 5);
 
 // SET UP XBEE
 XBee xbee = XBee();
@@ -26,6 +29,8 @@ void setup()
 {
   Serial.begin(9600);
   xbee.setSerial(Serial);
+  
+  softSerial.begin(4800);
   
   prevMillis = millis();
 }
@@ -52,6 +57,10 @@ void loop()
     uint8_t factoredSample = factorSample(sampleMaxes[i], sampleFloor, sampleCeiling);
     payload[i] = factoredSample;
   }
+  
+  softSerial.print(payload[0]);
+  softSerial.print(", ");
+  softSerial.println(payload[1]);
   
   xbee.send(zbTx);
 }
