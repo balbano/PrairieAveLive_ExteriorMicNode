@@ -27,7 +27,7 @@
 #include <SoftwareSerial.h>
 
 // NETWORK PARAMS
-const int numberOfMics = 2;
+const int numberOfMics = 3;
 // Controller alternates between polling an interior mote and the exterior
 // mote. GoL updates each time. Therefore, the number of samples needs to be
 // twice the number of mics to provide enough data to last until the
@@ -35,7 +35,7 @@ const int numberOfMics = 2;
 const int samplesPerTx = numberOfMics * 2;
 
 // AUDIO
-const int micPins[] = {1, 2};
+const int micPins[] = {1, 2, 1}; // XXX: Need to actually add 3rd mic.
 uint8_t sampleMaxes[numberOfMics]; // Holds max levels during the sampling period.
 const uint8_t sampleFloor = 100; // Use mic_check sketch to determine value.
 const uint8_t sampleCeiling = 190; // Use mic_check sketch to determine value.
